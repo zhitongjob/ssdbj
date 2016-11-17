@@ -3,8 +3,8 @@ package com.lovver.ssdbj.core;
 import java.util.Arrays;
 
 /**
- * Ğ­Òé²Ù×÷»º´æÀà
- * 
+ * åè®®æ“ä½œç¼“å­˜ç±»
+ *
  * @author jobell.jiang <jobell@qq.com>
  */
 public class MemoryStream {
@@ -13,26 +13,26 @@ public class MemoryStream {
 	public int slot = 0;
 	public int size = 0;
 	public byte[] buf;
-	
+
 	public MemoryStream(){
 		this(4096);
 	}
-	
+
 	public MemoryStream(int capacity){
 		this.capacity = capacity;
 		buf = new byte[capacity];
 	}
-	
+
 	public MemoryStream(byte[] copy){
 		this(copy, 0, copy.length);
 	}
-	
+
 	public MemoryStream(byte[] copy, int off, int len){
 		this.capacity = len;
 		this.size = len;
 		buf = Arrays.copyOfRange(copy, off, off + len);
 	}
-	
+
 	public byte[] toArray(){
 		byte[] ret = Arrays.copyOfRange(buf, data, data + size);
 		return ret;
@@ -63,11 +63,11 @@ public class MemoryStream {
 	public String repr(){
 		return repr(toArray());
 	}
-	
+
 	public int space(){
 		return capacity - slot;
 	}
-	
+
 	// try realloc
 	private void realloc(int require){
 		while(require > space()){
@@ -75,7 +75,7 @@ public class MemoryStream {
 			buf = Arrays.copyOf(buf, capacity);
 		}
 	}
-	
+
 	public void nice(){
 		if(data > capacity/2){
 			System.arraycopy(buf, data, buf, 0, size);
@@ -83,42 +83,42 @@ public class MemoryStream {
 			slot = size;
 		}
 	}
-	
+
 	public void decr(int num){
 		size -= num;
 		data += num;
 	}
-	
+
 	public void write(int b){
 		this.write((byte)b);
 	}
-	
+
 	public void write(byte b){
 		realloc(1);
 		buf[size] = b;
 		size += 1;
 		slot += 1;
 	}
-	
+
 	public void write(String s){
 		this.write(s.getBytes());
 	}
-	
+
 	public void write(byte[] bs){
 		this.write(bs, 0, bs.length);
 	}
-	
+
 	public void write(byte[] bs, int start, int len){
 		realloc(len);
 		System.arraycopy(bs, start, buf, slot, len);
 		size += len;
 		slot += len;
 	}
-	
+
 	public int memchr(int b, int offset){
 		return this.memchr((byte)b, offset);
 	}
-	
+
 	// return offset to data
 	public int memchr(byte b, int offset){
 		for(int i=data+offset; i<data+size; i++){

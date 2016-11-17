@@ -1,8 +1,8 @@
 package com.lovver.ssdbj.core;
 
 /**
- * ½á¹û¼¯´¦ÀíÆ÷½Ó¿Ú£¬ÓÃÀ´¶Ô½á¹û¼¯½øĞĞ×ª»»
- * 
+ * ç»“æœé›†å¤„ç†å™¨æ¥å£ï¼Œç”¨æ¥å¯¹ç»“æœé›†è¿›è¡Œè½¬æ¢
+ *
  * @author jobell.jiang <jobell@qq.com> 
  */
 public interface ResultHandler<T> {

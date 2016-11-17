@@ -1,23 +1,23 @@
 package com.lovver.ssdbj.core;
 
 /**
- * Ğ­Òé¼¶±ğÁ¬½Ó
- * 
+ * åè®®çº§åˆ«è¿æ¥
+ *
  * @author jobell.jiang <jobell@qq.com>
  */
 public interface ProtocolConnection extends BaseConnection {
 	/**
-	 * ·µ»ØĞ­ÒéÃû³Æ
+	 * è¿”å›åè®®åç§°
 	 * @return
 	 */
 	public String getProtocol();
-	
+
 	/**
-	 * ·µ»ØĞ­Òé°æ±¾ºÅ
+	 * è¿”å›åè®®ç‰ˆæœ¬å·
 	 * @return
 	 */
 	public String getProtocolVersion();
-	
+
 	public Protocol getProtocolImpl();
-	
+
 }

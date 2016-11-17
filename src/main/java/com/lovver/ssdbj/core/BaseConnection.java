@@ -5,45 +5,45 @@ import java.util.List;
 import com.lovver.ssdbj.exception.SSDBException;
 
 /**
- * »ù´¡Êı¾İ¿âÁ¬½Ó½Ó¿Ú
- * 
+ * åŸºç¡€æ•°æ®åº“è¿æ¥æ¥å£
+ *
  * @author jobell.jiang <jobell@qq.com>
  */
 public interface BaseConnection extends Wrapper {
 	/**
-	 * ¹Ø±ÕÁ¬½Ó
+	 * å…³é—­è¿æ¥
 	 */
 	public void close();
 	/**
-	 * ÅĞ¶ÏÁ¬½ÓÊÇ·ñ¹Ø±Õ
-	 * 
+	 * åˆ¤æ–­è¿æ¥æ˜¯å¦å…³é—­
+	 *
 	 * @return
 	 */
 	public boolean isClose();
 	/**
-	 * ÅĞ¶ÏÁ¬½ÓÊÇ·ñÕı³£
+	 * åˆ¤æ–­è¿æ¥æ˜¯å¦æ­£å¸¸
 	 */
 	public boolean isConnection();
 	/**
-	 * »ñÈ¡Ö¸ÁîÖ´ĞĞÆ÷
-	 * 
+	 * è·å–æŒ‡ä»¤æ‰§è¡Œå™¨
+	 *
 	 * @return
 	 */
 	public CommandExecutor getCommandExecutor();
-	
+
 	/**
-	 * Ö´ĞĞÖ¸Áî²¢ÇÒ·µ»Ø½á¹û
-	 * 
+	 * æ‰§è¡ŒæŒ‡ä»¤å¹¶ä¸”è¿”å›ç»“æœ
+	 *
 	 * @param cmd
 	 * @param params
 	 * @return
 	 * @throws SSDBException
 	 */
 	public BaseResultSet execute(String cmd,List<byte[]> params)throws SSDBException;
-	
+
 	/**
-	 * Ö´ĞĞÃüÁî²¢ÇÒ¸üĞÂdb
-	 * 
+	 * æ‰§è¡Œå‘½ä»¤å¹¶ä¸”æ›´æ–°db
+	 *
 	 * @param cmd
 	 * @param params
 	 * @throws SSDBException

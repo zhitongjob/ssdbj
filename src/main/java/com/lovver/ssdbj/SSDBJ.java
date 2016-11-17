@@ -26,18 +26,18 @@ public class SSDBJ {
 	static{
 		load(null);
 	}
-	
+
 	public static void load(String ssdbj_file){
 		if(StringUtils.isEmpty(ssdbj_file)){
 			ssdbj_file=DEFAULT_SSDBJ_FILE;
 		}
-		
+
 		XMLConfigParse parse = new XMLConfigParse();
 		try {
 			List<Cluster> lstCluster=parse.loadSSDBJ(ssdbj_file);
 			SSDBCluster.initCluster(lstCluster);
-			
-			//≈‰÷√cache
+
+			//ÈÖçÁΩÆcache
 			for(Cluster cluster:lstCluster){
 				cachedClusterConf.put(cluster.getId(),cluster);
 			}
@@ -45,32 +45,32 @@ public class SSDBJ {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
+
 	private static LoadBalanceFactory balanceFactory=LoadBalanceFactory.getInstance();
-	
+
 	@SuppressWarnings("rawtypes")
 	public static SSDBResultSet execute(String cluster_id,SSDBCmd cmd,String...params ) throws Exception{
 		return execute(cluster_id,cmd,Arrays.asList(params));
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	private static SSDBResultSet execute(BaseConnection conn,SSDBCmd cmd,List<byte[]> params) throws Exception{
 		return (SSDBResultSet) conn.execute(cmd.getCmd(), params);
 	}
-	
+
 	@SuppressWarnings({ "rawtypes", "unchecked", "static-access" })
 	public static SSDBResultSet execute(String cluster_id,SSDBCmd cmd,List<String> params) throws Exception{
 		LoadBalance lb = balanceFactory.createLoadBalance(cluster_id);
 		SSDBPoolConnection conn=null;
 		SSDBResultSet rs=null;
 		SSDBDataSource ds=null;
-		
+
 		List<byte[]> bP=new ArrayList<byte[]>();
 		for(String p:params){
 			bP.add(p.getBytes());
 		}
-		
+
 		Cluster cluster=cachedClusterConf.get(cluster_id);
 		int error_try_times=cluster.getError_retry_times();
 		try{
@@ -101,7 +101,7 @@ public class SSDBJ {
 			if(conn!=null)
 				conn.close();
 		}
-		
+
 		//error master retry
 		if(rs.getStatus().equals("error")&&cluster.isError_master_retry()&&error_try_times>0){
 			try{
@@ -123,7 +123,7 @@ public class SSDBJ {
 				conn.close();
 			}
 		}
-		
+
 		//not_found master retry
 		System.out.println(rs.getStatus());
 //		if(rs.getStatus().equals("not_found")){
@@ -148,7 +148,7 @@ public class SSDBJ {
 		}
 		return rs;
 	}
-	
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static boolean executeUpdate(String cluster_id,SSDBCmd  cmd,List<byte[]> params) throws Exception{
 		LoadBalance lb = balanceFactory.createLoadBalance(cluster_id);
@@ -164,7 +164,7 @@ public class SSDBJ {
 			conn.close();
 		}
 	}
-	
+
 	public static boolean executeUpdate(String cluster_id,SSDBCmd  cmd,String... params) throws Exception{
 		List<byte[]> bP=new ArrayList<byte[]>();
 		for(String p:params){
@@ -172,5 +172,5 @@ public class SSDBJ {
 		}
 		return executeUpdate(cluster_id,cmd,bP);
 	}
-	
+
 }

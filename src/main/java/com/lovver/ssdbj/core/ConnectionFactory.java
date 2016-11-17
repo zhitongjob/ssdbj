@@ -6,17 +6,17 @@ import com.lovver.ssdbj.exception.SSDBException;
 import com.lovver.ssdbj.util.GT;
 
 /**
- * Êı¾İ¿âÁ¬½Ó¹¤³§£¬¸ù¾İ²»Í¬µÄĞ­Òé²úÉúÁ¬½Ó ¿É×ÔĞĞÀ©Õ¹Ìí¼Ó
- * 
+ * æ•°æ®åº“è¿æ¥å·¥å‚ï¼Œæ ¹æ®ä¸åŒçš„åè®®äº§ç”Ÿè¿æ¥ å¯è‡ªè¡Œæ‰©å±•æ·»åŠ 
+ *
  * @author jobell.jiang <jobell@qq.com>
  */
 public abstract class ConnectionFactory  {
-	
-	  private static final Object[][] versions = {
-          { "1", new com.lovver.ssdbj.core.impl.ConnectionFactoryImpl() },
+
+	private static final Object[][] versions = {
+			{ "1", new com.lovver.ssdbj.core.impl.ConnectionFactoryImpl() },
 //          { "2", new com.lovver.ssdbj.core.v2.ConnectionFactoryImpl() },
-      };
-	  
+	};
+
 	public static ProtocolConnection openConnection(String host, int port,String user, Properties info)
 			throws SSDBException {
 //		String protoName = info.getProperty("protocolVersion");
@@ -38,6 +38,6 @@ public abstract class ConnectionFactory  {
 	}
 
 	public abstract ProtocolConnection openConnectionImpl(String host, int port,
-			String user, Properties info)
+														  String user, Properties info)
 			throws SSDBException;
 }

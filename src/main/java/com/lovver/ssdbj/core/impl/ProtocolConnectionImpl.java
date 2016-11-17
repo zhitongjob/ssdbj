@@ -13,8 +13,8 @@ import com.lovver.ssdbj.core.SSDBStream;
 import com.lovver.ssdbj.exception.SSDBException;
 
 /**
- * Ğ­Òé¼¶±ğÁ¬½Ó£¬¸ù¾İ²»Í¬µÄĞ­Òé²úÉú²»Í¬µÄÁ¬½Ó
- * 
+ * åè®®çº§åˆ«è¿æ¥ï¼Œæ ¹æ®ä¸åŒçš„åè®®äº§ç”Ÿä¸åŒçš„è¿æ¥
+ *
  * @author jobell.jiang
  */
 public class ProtocolConnectionImpl implements ProtocolConnection {
@@ -23,14 +23,14 @@ public class ProtocolConnectionImpl implements ProtocolConnection {
 	private Properties props;
 	private String user;
 	private CommandExecutor executor;
-    private Protocol protocol;
-    private String protocolName;
-    private String protocolVersion;
+	private Protocol protocol;
+	private String protocolName;
+	private String protocolVersion;
 
 	private boolean closed = false;
 
 	public ProtocolConnectionImpl(String protocolName,String protocolVersion,SSDBStream stream, String user,
-			Properties infos) {
+								  Properties infos) {
 		this.protocolName=protocolName;
 		this.protocolVersion=protocolVersion;
 		this.stream = stream;
@@ -79,14 +79,14 @@ public class ProtocolConnectionImpl implements ProtocolConnection {
 	@Override
 	public <T> T unwrap(Class<T> iface) throws SSDBException {
 		if (iface.isAssignableFrom(getClass()))        {
-            return (T) this;
-        }
-        throw new SSDBException("Cannot unwrap to " + iface.getName());
+			return (T) this;
+		}
+		throw new SSDBException("Cannot unwrap to " + iface.getName());
 	}
 
 	@Override
 	public boolean isWrapperFor(Class<?> iface) throws SSDBException {
-		 return iface.isAssignableFrom(getClass());
+		return iface.isAssignableFrom(getClass());
 	}
 
 	@Override
@@ -108,6 +108,6 @@ public class ProtocolConnectionImpl implements ProtocolConnection {
 	@Override
 	public boolean executeUpdate(String cmd, List<byte[]> params)
 			throws SSDBException {
-		return executor.executeUpdate(cmd, params); 
+		return executor.executeUpdate(cmd, params);
 	}
 }

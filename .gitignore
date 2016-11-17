@@ -20,7 +20,6 @@ target/
 
 # intellj file type #
 .idea/
-.svn/
 bin/
 *.iml
 

@@ -2,8 +2,8 @@ package com.lovver.ssdbj.core;
 
 
 /**
- * »ù´¡½á¹û¼¯½Ó¿Ú
- * 
+ * åŸºç¡€ç»“æœé›†æ¥å£
+ *
  * @author jobell.jiang <jobell@qq.com>
  */
 public interface BaseResultSet<T> {
